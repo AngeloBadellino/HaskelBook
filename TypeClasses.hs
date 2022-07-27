@@ -1,6 +1,8 @@
 -- We do not have a type constructor so we cannot
 -- instanciate a value of this type diretly
-data DayOfWeek = Mon | Tue | Wed | Thu | Fri | Sat | Sun
+data DayOfWeek = 
+    Mon | Tue | Wed | Thu | Fri | Sat | Sun
+    deriving Show
 
 -- We can use it in here however
 data Date = Date DayOfWeek Int
@@ -14,6 +16,12 @@ instance Eq DayOfWeek where
     (==) Sat Sat = True
     (==) Sun Sun = True
     (==) _ _ = False
+
+instance Ord DayOfWeek where
+    compare Mon Mon = EQ
+    compare _ Mon = GT
+    compare Mon _ = LT
+    compare _ _ = EQ
 
 -- The compile can infer the weekday and dayOfMont type
 instance Eq Date where
